@@ -1,51 +1,45 @@
+
+
 class TicTacToe:
 
-    def __init__(self, first_char):
-        self.first_char = first_char
-        self.Game_list = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
+    def __init__(self, firstChar):
+        self.firstChar = firstChar
+        self.grid = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
         self.count = 0
 
-        if self.first_char == "X":
-            self.second_char = "O"
-        elif self.first_char == "O":
-            self.second_char = "X"
+        if self.firstChar == "X":
+            self.secondChar = "O"
+        elif self.firstChar == "O":
+            self.secondChar = "X"
 
     def display(self):
-        self.no_of_high = 11
+        self.noOfHigh = 11
         print(
-            f' {self.Game_list[0][0]} | {self.Game_list[0][1]} | {self.Game_list[0][2]} ')
-        print("-" * self.no_of_high)
+            f' {self.grid[0][0]} | {self.grid[0][1]} | {self.grid[0][2]} ')
+        print("-" * self.noOfHigh)
         print(
-            f' {self.Game_list[1][0]} | {self.Game_list[1][1]} | {self.Game_list[1][2]} ')
-        print("-" * self.no_of_high)
+            f' {self.grid[1][0]} | {self.grid[1][1]} | {self.grid[1][2]} ')
+        print("-" * self.noOfHigh)
         print(
-            f' {self.Game_list[2][0]} | {self.Game_list[2][1]} | {self.Game_list[2][2]} ')
+            f' {self.grid[2][0]} | {self.grid[2][1]} | {self.grid[2][2]} ')
 
     def play(self, coords):
+
         if self.count % 2 == 0:
-            self.current_step_char = self.first_char
+            self.currentStepChar = self.firstChar
         else:
-            self.current_step_char = self.second_char
+            self.currentStepChar = self.secondChar
 
         self.coords = coords
-        if self.coords == 1:
-            self.Game_list[0][0] = self.current_step_char
-        elif self.coords == 2:
-            self.Game_list[0][1] = self.current_step_char
-        elif self.coords == 3:
-            self.Game_list[0][2] = self.current_step_char
-        elif self.coords == 4:
-            self.Game_list[1][0] = self.current_step_char
-        elif self.coords == 5:
-            self.Game_list[1][1] = self.current_step_char
-        elif self.coords == 6:
-            self.Game_list[1][2] = self.current_step_char
-        elif self.coords == 7:
-            self.Game_list[2][0] = self.current_step_char
-        elif self.coords == 8:
-            self.Game_list[2][1] = self.current_step_char
-        elif self.coords == 9:
-            self.Game_list[2][2] = self.current_step_char
+
+        def getRowCoord(coord, row):
+            return coord - (3 * row + 1)
+
+        for i in range(3):
+            if coords >= 3*i + 1 and coords <= 3*(i+1):
+                col = i
+                row = getRowCoord(coords, col)
+                self.grid[col][row] = self.currentStepChar
 
         print()
         print()
@@ -54,8 +48,8 @@ class TicTacToe:
 
 
 game = TicTacToe(input())
-print()
-print()
+print('\n'*2)
+
 print(
     '  1 | 2 | 3  ')
 print("-" * 11)
@@ -64,38 +58,8 @@ print(
 print("-" * 11)
 print(
     '  7 | 8 | 9  ')
-print()
-print()
-game.play(int(input()))
-print()
-print()
-print()
-game.play(int(input()))
-print()
-print()
-print()
-game.play(int(input()))
-print()
-print()
-print()
-game.play(int(input()))
-print()
-print()
-print()
-game.play(int(input()))
-print()
-print()
-print()
-game.play(int(input()))
-print()
-print()
-print()
-game.play(int(input()))
-print()
-print()
-print()
-game.play(int(input()))
-print()
-print()
-print()
-game.play(int(input()))
+print('\n'*2)
+
+for i in range(9):
+    game.play(int(input()))
+    print('\n'*3)
